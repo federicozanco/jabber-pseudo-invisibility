@@ -1,0 +1,163 @@
+Jabber Pseudo Invisibility
+
+Description (Brand new method with respect to 0.3.4):
+Adds a Pseudo Invisible status to all Jabber/XMPP accounts. When you’re pseudo 
+invisible you appear online in some of your buddies's buddy list and offline to
+all other. You result online to your buddies in Best Friends group.
+This method is completely different from the one used in 0.3.4. Maybe someone 
+wants to continue using the old method/version so I’ve kept 0.3.4 in 
+http://www.siorarina.net/jabber-pseudo-invisibility/
+
+How it works:
+When you change your status to pseudo invisible, the plugin sends a presence 
+unavailable to all buddies not in Best Friends group and every time one of them
+sends you a presence stanza, the plugin replies with a presence unavailable so
+that you result always offline.
+It should be something similar to privacy list (just move a buddy to Best 
+Friends group in buddy list to make her/him receive your real status) but much
+less reliable and much more cheatable.
+
+Hack:
+The main issue in this method is that a buddy who want to discover if you're
+pseudo invisible (hence online) could just send a presence probe and wait for
+a presence in response that will confirm you're not really offline.
+
+Issues:
+o - I've found that setting an avatar in Google account and not in Pidgin can 
+    be an issue because experimentally I've observed that cyclically Google 
+    servers send a presence (I suppose) to update the avatar. This fact reveals
+    your status to all your buddies.
+    Setting an avatar in Pidgin account settings or delete the avatar in Google
+    account settings seems to avoid this issue.
+o - When Pidgin starts, if status Pseudo Invisible is set then you appear 
+    Online for a moment because the plugin can't avoid "normal" login 
+    procedure. You have to result online to the server to get all updates.
+    This should be a very short time but quite enough to be catched.
+
+Main differences with respect to 0.3.4:
+o - No more polling (this means low traffic and… cleaner code :))
+o - Update status of all buddies (not only the ones in Best Friends group)
+o - All buddies can start a chat (in 0.3.4 only you could start a chat)
+o - Buddies can easily check if you’re pseudo invisible (read Hack)
+
+
+Contacts:
+For bugs reports, hints, … email me at federico.zanco ( at ) gmail.com.
+
+How to install:
+Read the INSTALL file.
+
+How to use:
+1)  Compile and Install (read INSTALL) or Download (from 
+    http://www.siorarina.net/jabber-pseudo-invisibility/) the plugin for your 
+    arch.
+
+2)  Linux: if you don't have GNU make program installed on your system, to 
+    install the plugin manually copy jabber-pseudo-invisibility.so in your 
+    purple home dir:
+    
+    (if ~/.purple/plugins/ does not exist: $ mkdir ~/.purple/plugins/ )
+    $ cp jabber-pseudo-invisibility.so ~/.purple/plugins/
+
+    Windows: Move jabber-pseudo-invisibility.dll in Pidgin plugins dir (I 
+    suppose you can create 
+    C:\Documents and Settings\<user>\Applications data\.purple\plugins 
+    and move the plugin there). In Windows it should be something like 
+    C:\Programmi\Pidgin\plugins\
+
+3)  Restart Pidgin and in Tools/Plugins you should see Jabber Pseudo 
+    Invisibility Plugin.
+
+    On loading, the plugin creates the group Best Friends (if you can’t see it 
+    enable Offline Buddies in Buddies/Show) and add a new status called Pseudo 
+    Invisible. 
+    Every buddy in Best Friends group will see you online (DnD with status
+    message: Pseudo Invisible) while you'll result offline to all others.
+    You can move buddies in/out Best Friends group to/not to notify your 
+    presence.
+    Unfortunately there's no way for the plugin to be notified when you do such
+    a change so after moving a buddy in/out Best Friends group in Contact List 
+    Menu you've to click on 
+    Tools/Jabber Pseudo Invisibility/Update blist to let changes take effect.
+
+    Also note that if you have Inactivity settings enabled you risk to result 
+    online (Idle) when the client notify the server. To avoid this, set Disable 
+    Idle Reporting and Auto Away in the plugin conf or disable Inactivity 
+    settings.
+
+    If have set an avatar in Google account then set an avatar in Pidgin 
+    account settings. See Issue.
+
+
+
+*******************************************************************************
+Old Description (0.3.4):
+Adds a Pseudo Invisible status to all Jabber/XMPP accounts. When you’re pseudo 
+invisible you result offline (your buddies can’t see you online) and you can 
+monitor the status of your favorite buddies (and start conversations). Read 
+CAREFULLY the README section below!!!
+By enabling “Send presence online to your Best Friends” options in plugin 
+configuration, you can allow your best friends to see you online. They’ll see 
+your buddy with status dnd (do not disturb) and status message “Pseudo 
+Invisible”.
+
+NOTE:
+
+o - although they can see you online they can’t start conversations. Only you 
+    can
+    
+o - if a buddy is in Best Friends group and at the same time in another group, 
+    that buddy will not be considered a best friend. This means that best 
+    friends have to stay only in one group
+
+
+How to use:
+1)  Compile and Install (read INSTALL) or Download (from 
+    http://www.siorarina.net/jabber-pseudo-invisibility/) the plugin for your 
+    arch.
+
+    Linux: if you don't have GNU make program installed on your system, to 
+    install the plugin manually copy jabber-pseudo-invisibility.so in your 
+    purple home dir:
+    
+    (if ~/.purple/plugins/ does not exist: $ mkdir ~/.purple/plugins/ )
+    $ cp jabber-pseudo-invisibility.so ~/.purple/plugins/
+
+    Windows: Move jabber-pseudo-invisibility.dll in Pidgin plugins dir (I 
+    suppose you can create 
+    C:\Documents and Settings\<user>\Applications data\.purple\plugins 
+    and move the plugin there). In Windows it should be something like 
+    C:\Programmi\Pidgin\plugins\
+
+3)  Restart Pidgin and in Tools/Plugins you should see Jabber Pseudo 
+    Invisibility Plugin
+
+    On loading, the plugin creates the group Best Friends (if you can’t see it 
+    enable Offline Buddies in Buddies/Show) and add a new status called Pseudo 
+    Invisible. Now, to keep a buddy status up to date move it (or copy it) on 
+    Best Friends group and then set status Pseudo Invisible. You can add and 
+    remove buddies in BestFriends whenever you want because the list in updated 
+    on every timeout.
+
+    Configuring plugin you can enable sending online presence to you 
+    bestfriends. They’ll see you on line with status dnd (Do Not Disturb) and 
+    message status “Pseudo Invisible”, so they know that only you can start a 
+    conversation.
+
+    Also note that if you have Inactivity settings enabled you risk to result 
+    online (Idle) when the client notify the server. To avoid this, set Disable 
+    Idle Reporting and Auto Away in the plugin conf or disable Inactivity 
+    settings.
+
+    WARNING!!! This plugin generate a discrete amount of traffic proportional to
+    the number of buddies in Best Friends group (it does a polling). So, unless 
+    you have an high speed Internet connection (and you think your jabber server
+    can support it), it’s not a good idea put all your buddies in Best Friends 
+    group!!! You can set the timeout value in Configure plugin. Obviously the 
+    lower the value the lower the traffic generated.
+
+Issues:
+o - If you enable sending presence to your best friends, they can view you 
+    online but they can’t start a conversation. Only you can.
+*******************************************************************************
+

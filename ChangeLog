@@ -1,0 +1,19 @@
+Date        Version Note
+
+02/01/2012  0.4.2   Misc changes. I've tried to avoid sending unnecessary
+                    presences
+
+
+02/01/2012  0.4.1   Now every presence stanza sent by the client is triggered
+                    and blist updated. This should resolve erroneous Online
+                    status when starting Pseudo Invisible
+
+
+02/01/2012  0.4.0   Brand new method to get Pseudo Invisibility. No 
+                    more polling but a weaker and hackable, though cleaner and
+                    low-traffic, solution
+
+
+19/01/2011  0.3.4   Nothing new but I've add a Makefile to make compiling easier
+                    and more efficient. Now unused dependencies like gtk are no
+                    more needed (Finch users should be happy!)
